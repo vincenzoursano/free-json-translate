@@ -1,6 +1,6 @@
 ## Free json translate
 
-A script that gives you the ability to translate a nested json for free without using any service keys.
+A script that gives you the ability to translate a i18n JSON nested for free without using any service keys.
 
 ## Project Status
 
