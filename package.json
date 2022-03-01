@@ -1,0 +1,23 @@
+{
+  "name": "free-json-translate",
+  "version": "0.0.1",
+  "description": "Script to translate in a free way the values of a json.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vincenzoursano/free-json-translate.git"
+  },
+  "author": "Vincenzo Ursano",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vincenzoursano/free-json-translate/issues"
+  },
+  "homepage": "https://github.com/vincenzoursano/free-json-translate#readme",
+  "dependencies": {
+    "xlsx": "^0.18.2"
+  }
+}
