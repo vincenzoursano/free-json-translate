@@ -13,42 +13,40 @@ const OUTPUT_TRANSLATED_JSON_FILE = "assets/result.json";
   let values = [];
   let _error = null;
 
-  if (!fs.existsSync(OUTPUT_XLSX_FILE)) {
-    const ans1 = await askQuestion(
-      `Have you placed the json you want to translate in this location |${INPUT_JSON_FILE}| (y/n)? `
-    );
-    switch (ans1) {
-      case "n":
-        console.log("Please perform this operation.");
-        break;
-      case "y":
-        try {
-          const obj = JSON.parse(fs.readFileSync(INPUT_JSON_FILE, "utf8"));
-          values = getValues(obj);
-          const ws = XLSX.utils.json_to_sheet(
-            values.map((v) => {
-              return { "[KEY_SHEET]": v.elm };
-            })
-          );
-          const wb = XLSX.utils.book_new();
-          XLSX.utils.book_append_sheet(wb, ws, "Responses");
-          XLSX.writeFile(wb, OUTPUT_XLSX_FILE);
-          console.log(`XLSX |${OUTPUT_XLSX_FILE}| is saved.`);
-        } catch (error) {
-          _error = error;
-          console.log("Generic error.");
-        }
-        break;
-      default:
-        console.log("Invalid response.");
-        break;
-    }
-
-    if (ans1 !== "y" || _error) {
-      return;
-    }
-    console.log("");
+  const ans1 = await askQuestion(
+    `Have you placed the json you want to translate in this location |${INPUT_JSON_FILE}| (y/n)? `
+  );
+  switch (ans1) {
+    case "n":
+      console.log("Please perform this operation.");
+      break;
+    case "y":
+      try {
+        const obj = JSON.parse(fs.readFileSync(INPUT_JSON_FILE, "utf8"));
+        values = getValues(obj);
+        const ws = XLSX.utils.json_to_sheet(
+          values.map((v) => {
+            return { "[KEY_SHEET]": v.elm };
+          })
+        );
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Responses");
+        XLSX.writeFile(wb, OUTPUT_XLSX_FILE);
+        console.log(`XLSX |${OUTPUT_XLSX_FILE}| is saved.`);
+      } catch (error) {
+        _error = error;
+        console.log("Generic error.");
+      }
+      break;
+    default:
+      console.log("Invalid response.");
+      break;
   }
+
+  if (ans1 !== "y" || _error) {
+    return;
+  }
+  console.log("");
 
   const ans2 = await askQuestion(
     `Did you translate with google translate the |${OUTPUT_XLSX_FILE}| and put in |${TRANSLATED_XLSX_FILE}| (y/n)? `
